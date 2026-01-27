@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<style type="text/css">
+		body {
+			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+			font-weight: 300;
+			font-size: 18px;
+			margin-left: auto;
+			margin-right: auto;
+			width: 1500px;
+		}
+
+		h1 {
+			font-size: 32px;
+			font-weight: 300;
+		}
+
+		h2 {
+			font-size: 26px;
+			font-weight: 300;
+		}
+
+		h3 {
+			font-size: 22px;
+			font-weight: 300;
+		}
+
+		img.rounded {
+			border: 1px solid #eeeeee;
+			border-radius: 10px;
+			-moz-border-radius: 10px;
+			-webkit-border-radius: 10px;
+		}
+
+		a:link,
+		a:visited {
+			color: #1367a7;
+			text-decoration: none;
+		}
+
+		a:hover {
+			color: #208799;
+		}
+
+		hr {
+			border: 0;
+			height: 1px;
+			background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+		}
+
+		table.demo-table {
+			width: 100%;
+			border-collapse: collapse;
+			margin: 20px 0;
+		}
+
+		table.demo-table th {
+			background-color: #f5f5f5;
+			padding: 12px;
+			text-align: center;
+			border: 1px solid #ddd;
+			font-weight: 500;
+		}
+
+		table.demo-table td {
+			padding: 12px;
+			text-align: center;
+			border: 1px solid #ddd;
+			vertical-align: middle;
+		}
+
+		table.demo-table th.model-header {
+			background-color: #e8f4f8;
+			font-size: 18px;
+			font-weight: 600;
+		}
+
+		table.demo-table th.mix-header {
+			background-color: #fff3cd;
+			font-size: 16px;
+		}
+
+		table.demo-table th.sample-header {
+			background-color: #d1ecf1;
+		}
+
+		.model-label {
+			font-weight: 600;
+			color: #333;
+		}
+
+		.original-weight {
+			color: #dc3545;
+		}
+
+		.hive-trained {
+			color: #28a745;
+		}
+
+		.placeholder {
+			width: 100%;
+			height: 150px;
+			background-color: #f0f0f0;
+			border: 2px dashed #ccc;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #999;
+			font-size: 14px;
+		}
+
+		.demo-section {
+			max-width: 1100px;
+			margin: 30px auto 10px;
+		}
+
+		.demo-card {
+			background: #ffffff;
+			border: 1px solid #e6e6e6;
+			border-radius: 16px;
+			box-shadow: 0 10px 30px rgba(20, 40, 80, 0.08);
+			padding: 20px 24px 24px;
+		}
+
+		.demo-header {
+			display: flex;
+			flex-direction: column;
+			gap: 6px;
+			margin-bottom: 16px;
+		}
+
+		.demo-title {
+			font-size: 22px;
+			font-weight: 600;
+			color: #1d2a44;
+		}
+
+		.demo-subtitle {
+			font-size: 14px;
+			color: #5f6b85;
+		}
+
+		.demo-controls {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			margin-bottom: 16px;
+			flex-wrap: wrap;
+		}
+		
+		#variantContainer {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+		}
+
+		.demo-label {
+			font-size: 14px;
+			color: #34415e;
+			font-weight: 600;
+		}
+
+		.demo-select {
+			min-width: 160px;
+			padding: 10px 12px;
+			border: 1px solid #d6dbe5;
+			border-radius: 10px;
+			font-size: 14px;
+			color: #1d2a44;
+			background: #f9fbff;
+		}
+
+		.demo-grid {
+			display: grid;
+			grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+			gap: 18px;
+			align-items: start;
+		}
+
+		.demo-media {
+			background: #f8f9fc;
+			border-radius: 12px;
+			padding: 12px;
+			border: 1px solid #e4e8f0;
+		}
+
+		.demo-spectrogram {
+			width: 100%;
+			border-radius: 8px;
+			display: block;
+		}
+
+		.demo-audio {
+			width: 100%;
+		}
+
+		.demo-mix-container {
+			margin: 0 auto 30px;
+			max-width: 520px;
+		}
+
+		.demo-mix-title {
+			font-size: 20px;
+			font-weight: 600;
+			color: #2c5aa0;
+			margin-bottom: 10px;
+			text-align: center;
+		}
+
+		.demo-mix-item {
+			background: #f8f9fc;
+			border-radius: 12px;
+			padding: 12px;
+			border: 1px solid #e4e8f0;
+			width: 100%;
+		}
+
+		.demo-mix-item img {
+			width: 100%;
+			border-radius: 8px;
+			margin-bottom: 8px;
+			display: block;
+		}
+
+		.demo-mix-item audio {
+			width: 100%;
+		}
+
+		.demo-compare-container {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 20px;
+			margin-top: 20px;
+		}
+
+		.demo-column {
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+		}
+
+		.demo-column-label {
+			font-size: 18px;
+			font-weight: 600;
+			color: #1d2a44;
+			margin-bottom: 8px;
+			padding: 8px 12px;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			color: white;
+			border-radius: 8px;
+			text-align: center;
+		}
+
+		.demo-column:first-child .demo-column-label {
+			background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+		}
+
+		.demo-item {
+			background: #f8f9fc;
+			border-radius: 12px;
+			padding: 12px;
+			border: 1px solid #e4e8f0;
+		}
+
+		.demo-item-title {
+			font-size: 16px;
+			font-weight: 600;
+			color: #1d2a44;
+			margin-bottom: 8px;
+			text-align: center;
+		}
+
+		.demo-item img {
+			width: 100%;
+			height: 200px;
+			object-fit: cover;
+			border-radius: 8px;
+			margin-bottom: 8px;
+			display: block;
+		}
+
+		.demo-item audio {
+			width: 100%;
+		}
+
+		.figure-section {
+			max-width: 1100px;
+			margin: 30px auto 10px;
+		}
+
+		.figure-card {
+			background: #ffffff;
+			border: 1px solid #e6e6e6;
+			border-radius: 16px;
+			box-shadow: 0 10px 30px rgba(20, 40, 80, 0.08);
+			padding: 20px 24px 24px;
+		}
+
+		.figure-title {
+			font-size: 22px;
+			font-weight: 600;
+			color: #1d2a44;
+			margin-bottom: 12px;
+			text-align: center;
+		}
+
+		.figure-caption {
+			font-size: 14px;
+			color: #5f6b85;
+			text-align: center;
+			margin-top: 8px;
+		}
+
+		.figure-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+			gap: 18px;
+			align-items: start;
+		}
+
+		.figure-grid.two-cols {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+
+		.figure-grid.one-col {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.figure-grid.two-cols .figure-item {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.figure-grid.two-cols .figure-item img {
+			height: 260px;
+			width: auto;
+			max-width: 100%;
+		}
+
+		.figure-item {
+			background: #f8f9fc;
+			border-radius: 12px;
+			padding: 12px;
+			border: 1px solid #e4e8f0;
+		}
+
+		.figure-item img {
+			width: 100%;
+			border-radius: 8px;
+			display: block;
+		}
+	</style>
+
+	<title>A Semantically Consistent Dataset for Data-Efficient Query-Based Universal Sound Separation</title>
+</head>
+
+<body>
+	<br>
+	<h1 align="center">A Semantically Consistent Dataset for Data-Efficient Query-Based Universal Sound Separation</h1>
+	<p align="center">
+		<img src="assets/logo.png" alt="Logo" width="250" />
+	</p>
+	<p align="center">
+		<strong><a href="https://cslikai.cn/">Kai Li</a><sup>*</sup>, Jintao Cheng<sup>*</sup>, <a href="https://zengchang233.github.io/">Chang Zeng</a>, Zijun Yan, <a href="https://wanghelin1997.github.io/helinwang">Helin Wang</a>, <a href="https://www.shawnsu.net/">Zixiong Su</a>, <a href="http://www.bozheng-lab.com/">Bo Zheng</a>, <a href="https://www.xlhu.cn/">Xiaolin Hu</a></strong><br>
+		<strong>Tsinghua University, Shanda AI, Johns Hopkins University</strong><br>
+		<strong><sup>*</sup>Equal contribution</strong><br>
+		<strong>Completed during Kai Li's internship at Shanda AI.</strong><br>
+		<a href="#">📜 Arxiv 2026</a> | <a href="https://github.com/ShandaAI/Hive">⚙️ Code</a> | <a href="https://huggingface.co/datasets/ShandaAI/Hive">🤗 Dataset</a>
+	</p>
+	<p align="center">
+		<img src="https://visitor-badge.laobi.icu/badge?page_id=ShandaAI.Hive" alt="访客统计" />
+		<img src="https://img.shields.io/github/stars/ShandaAI/Hive?style=social" alt="GitHub stars" />
+		<img alt="Static Badge" src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" />
+	</p>
+	<!-- <br> -->
+
+	<center>
+		<p style="max-width:750px;">We propose an automated pipeline that eliminates co-occurrence noise by mining 
+			<a style="color: blue;">high-purity single-event segments</a> from unconstrained recordings and synthesizing 
+			<a style="color:green;">semantically consistent mixtures</a>. Utilizing this pipeline, we constructed <a style="color:orange;">Hive</a>, 
+			a high-quality synthetic dataset comprising 2k hours of audio.
+		</p>
+	</center>
+	<hr>
+
+	<table align=center width=850px>
+		<center>
+			<h1>Abstract</h1>
+		</center>
+		<tr>
+			<td style="text-align: justify;">
+				Query-based universal sound separation is fundamental to intelligent auditory systems, aiming to isolate specific sources from unconstrained mixtures. 
+				Despite recent advances, existing methods continue to suffer from residual interference in complex acoustic scenes. 
+				This performance limitation stems largely from a data bottleneck: ubiquitous in-the-wild datasets contain weak labels and severe event co-occurrence. 
+				These flaws induce models to learn spurious correlations between background noise and target categories instead of robust acoustic features. 
+				To address this, we propose an automated pipeline that eliminates co-occurrence noise by mining high-purity single-event segments 
+				from unconstrained recordings and synthesizing mixtures via semantically consistent strategies. 
+				Utilizing this pipeline, we constructed <i>Hive</i>, a high-quality synthetic dataset comprising 2k hours of audio. 
+				<a style="color:blue;"> Experimental results demonstrate that, despite using only <b>~0.2%</b> of the data scale of million-hour baselines, 
+				models trained on Hive achieve competitive separation accuracy and perceptual quality.</a> 
+				Moreover, these models exhibit remarkable zero-shot generalization on out-of-distribution evaluation benchmarks such as MUSDB18-HQ and USS-Bench. 
+				These findings highlight that <a style="background-color:LightYellow;color:red">prioritizing supervision purity enables significant data efficiency</a>, 
+				offering a new paradigm for training robust auditory foundation models with reduced computational costs.
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<center>
+		<table align=center width=850px>
+			<tr>
+				<td>
+					<center>
+						<img class="rounded" style="border: none; outline: none; box-shadow: none; width:100%" src="assets/bee.png" />
+					</center>
+				</td>
+			</tr>
+		</table>
+		<table align=center width=850px>
+			<tr>
+				<td>
+					<center>
+						Overview of the proposed <a style="color:rgb(255, 136, 0);">automated pipeline</a>. The framework consists of three coupled stages: 
+						(1) Ontology Reconstruction & Data Preprocessing. 
+						(2) Single-source Semantic-acoustic Alignment. 
+						(3) Super-resolution-based Standardization.
+					</center>
+				</td>
+			</tr>
+		</table>
+	</center>
+	<hr>
+
+	<div class="figure-section">
+		<div class="figure-card">
+			<div class="figure-title">Hive Dataset</div>
+			<div class="figure-grid two-cols">
+				<div class="figure-item">
+					<img src="assets/dataset_treemap.png" alt="Dataset treemap">
+					<div class="figure-caption">Dataset composition across sources.</div>
+				</div>
+				<div class="figure-item">
+					<img src="assets/mix_pie_01.png" alt="Mix distribution">
+					<div class="figure-caption">Mixture type distribution (2-5 mix).</div>
+				</div>
+			</div>
+			<div class="figure-grid one-col" style="margin-top: 18px;">
+				<div class="figure-item">
+					<img src="assets/label_counts_01.png" alt="Label statistics">
+					<div class="figure-caption">Label frequency statistics.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="figure-section">
+		<div class="figure-card">
+			<div class="figure-title">Performance & Efficiency</div>
+			<div class="figure-grid one-col">
+				<div class="figure-item">
+					<img src="assets/results.png" alt="Separation results">
+					<div class="figure-caption">Separation performance results.</div>
+				</div>
+			</div>
+			<div class="figure-grid one-col" style="margin-top: 18px;">
+				<div class="figure-item">
+					<img src="assets/efficient.png" alt="Efficiency comparison">
+					<div class="figure-caption">Efficiency comparison across models.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<center>
+		<h1>Demo Samples</h1>
+		<p style="max-width:850px;">
+			Below we show inference results for different models on four types of mixture (2mix, 3mix, 4mix, 5mix).
+		</p>
+		<p style="max-width:850px;">
+			For each mixture type, we present <b><b>three</b></b> test samples.
+			AudioSep and FlowSep provide Hive-trained versions, selectable via the Model Weights dropdown next to each model.
+		</p>
+	</center>
+
+	<div class="demo-section">
+		<div class="demo-card">
+			<div class="demo-header">
+				
+				<div class="demo-subtitle">Select model, mix type, and sample to view full comparison</div>
+			</div>
+			<div class="demo-controls">
+				<label class="demo-label" for="mixSelect">Mix Type</label>
+				<select class="demo-select" id="mixSelect">
+					<option value="2mix" selected>2mix</option>
+					<option value="3mix">3mix</option>
+					<option value="4mix">4mix</option>
+					<option value="5mix">5mix</option>
+				</select>
+				<label class="demo-label" for="sampleSelect">Sample</label>
+				<select class="demo-select" id="sampleSelect">
+					<option value="sample_00000125">样本1</option>
+					<option value="sample_00000088">样本2</option>
+					<option value="sample_00000058">样本3</option>
+				</select>
+				<label class="demo-label" for="modelSelectA">Model A</label>
+				<select class="demo-select" id="modelSelectA">
+					<option value="AudioSep">AudioSep</option>
+					<option value="CLIPSep">CLIPSep</option>
+					<option value="ZETA">ZETA</option>
+					<option value="ZeroSep">ZeroSep</option>
+					<option value="OmniSep">OmniSep</option>
+					<option value="FlowSep">FlowSep</option>
+					<option value="LASS">LASS</option>
+					<option value="DGMO">DGMO</option>
+					<option value="SAM-Audio">SAM-Audio</option>
+				</select>
+				<div id="variantContainerA" style="display: none;">
+					<label class="demo-label" for="variantSelectA">Model Weights</label>
+					<select class="demo-select" id="variantSelectA">
+						<option value="origin">Official</option>
+						<option value="hive">Hive-trained</option>
+					</select>
+				</div>
+				<label class="demo-label" for="modelSelectB">Model B</label>
+				<select class="demo-select" id="modelSelectB">
+					<option value="AudioSep">AudioSep</option>
+					<option value="CLIPSep">CLIPSep</option>
+					<option value="ZETA">ZETA</option>
+					<option value="ZeroSep">ZeroSep</option>
+					<option value="OmniSep">OmniSep</option>
+					<option value="FlowSep">FlowSep</option>
+					<option value="LASS">LASS</option>
+					<option value="DGMO">DGMO</option>
+					<option value="SAM-Audio">SAM-Audio</option>
+				</select>
+				<div id="variantContainerB" style="display: none;">
+					<label class="demo-label" for="variantSelectB">Model Weights</label>
+					<select class="demo-select" id="variantSelectB">
+						<option value="origin">Official</option>
+						<option value="hive">Hive-trained</option>
+					</select>
+				</div>
+			</div>
+			<div id="content"></div>
+		</div>
+	</div>
+
+	<hr>
+
+	<table align=center width=900px>
+		<tr>
+			<td width=400px>
+				<center>
+					<h1>Acknowledgements</h1>
+					Website template was borrowed from <a href="http://richzhang.github.io/colorization/">Colorful Image
+						Colorization</a> and <a href="https://nerfies.github.io/">Nerfies</a>.
+				</center>
+			</td>
+		</tr>
+	</table>
+	<br>
+
+	<script>
+		(function () {
+			var modelSelectA = document.getElementById("modelSelectA");
+			var variantContainerA = document.getElementById("variantContainerA");
+			var variantSelectA = document.getElementById("variantSelectA");
+			var modelSelectB = document.getElementById("modelSelectB");
+			var variantContainerB = document.getElementById("variantContainerB");
+			var variantSelectB = document.getElementById("variantSelectB");
+			var mixSelect = document.getElementById("mixSelect");
+			var sampleSelect = document.getElementById("sampleSelect");
+			var content = document.getElementById("content");
+			if (!modelSelectA || !modelSelectB || !mixSelect || !sampleSelect || !content || !variantContainerA || !variantSelectA || !variantContainerB || !variantSelectB) {
+				return;
+			}
+			
+			var sampleMap = {
+				"2mix": ["sample_00000005", "sample_00000009", "sample_00000033", "sample_00000035", "sample_00000039"],
+				"3mix": ["sample_00000016", "sample_00000062", "sample_00000100", "sample_00000101", "sample_00000120"],
+				"4mix": ["sample_00000040", "sample_00000111", "sample_00000143", "sample_00000411", "sample_00000518"],
+				"5mix": ["sample_00000058", "sample_00000088", "sample_00000125", "sample_00000432", "sample_00000434"]
+			};
+			
+			var labelsData = {
+				"sample_00000005": ["Bird", "Male speech, man speaking"],
+				"sample_00000009": ["Fowl", "Bird"],
+				"sample_00000033": ["Bird", "Dog"],
+				"sample_00000035": ["Vehicle", "Guitar"],
+				"sample_00000039": ["Pig", "Boat, Water vehicle"],
+				"sample_00000016": ["Flute", "Male speech, man speaking", "Bird"],
+				"sample_00000062": ["Bird", "Male speech, man speaking", "Thunderstorm"],
+				"sample_00000100": ["Bird", "Male speech, man speaking", "Wind"],
+				"sample_00000101": ["Bird", "Male speech, man speaking", "Telephone"],
+				"sample_00000120": ["Bird", "Male speech, man speaking", "Toilet flush"],
+				"sample_00000040": ["Female speech, woman speaking", "Piano", "Rain", "Vehicle"],
+				"sample_00000111": ["Bird", "Male speech, man speaking", "Electronic music", "Brass instrument"],
+				"sample_00000143": ["Bird", "Engine", "Vehicle", "Female speech, woman speaking"],
+				"sample_00000411": ["Whistling", "Bird", "Child speech, kid speaking", "Boat, Water vehicle"],
+				"sample_00000518": ["Glass", "Bird", "Vehicle", "Double bass"],
+				"sample_00000058": ["Child speech, kid speaking", "Bird", "Heart sounds, heartbeat", "Female speech, woman speaking", "Buzzer"],
+				"sample_00000088": ["Breathing", "Child speech, kid speaking", "Piano", "Male singing", "Male speech, man speaking"],
+				"sample_00000125": ["Bird", "Engine", "Male speech, man speaking", "Thunderstorm", "Breathing"],
+				"sample_00000432": ["Child speech, kid speaking", "Coin (dropping)", "Boat, Water vehicle", "Male speech, man speaking", "Laughter"],
+				"sample_00000434": ["Clock", "Violin, fiddle", "Race car, auto racing", "Fowl", "Vehicle"]
+			};
+			
+			var allowed = {
+				AudioSep_origin: { mix: true, s: true, inference: true },
+				AudioSep_hive: { mix: true, s: true, inference: true },
+				CLIPSep: { mix: true, s: true, inference: true },
+				ZETA: { mix: true, s: true, inference: true },
+				ZeroSep: { mix: true, s: true, inference: true },
+				OmniSep: { mix: true, s: true, inference: true },
+				FlowSep_origin: { mix: true, s: true, inference: true },
+				FlowSep_hive: { mix: true, s: true, inference: true },
+				LASS: { mix: true, s: true, inference: true },
+				DGMO: { mix: true, s: true, inference: true },
+				"SAM-Audio": { mix: true, s: true, inference: true }
+			};
+			
+			var updateVariantVisibility = function (modelSelect, variantContainer) {
+				var model = modelSelect.value;
+				if (model === "AudioSep" || model === "FlowSep") {
+					variantContainer.style.display = "flex";
+				} else {
+					variantContainer.style.display = "none";
+				}
+			};
+			
+			var getModelKey = function (modelSelect, variantSelect) {
+				var model = modelSelect.value;
+				if (model === "AudioSep" || model === "FlowSep") {
+					var variant = variantSelect.value;
+					return model + "_" + variant;
+				}
+				return model;
+			};
+			
+			var getModelLabel = function (modelSelect, variantSelect) {
+				var model = modelSelect.value;
+				if (model === "AudioSep" || model === "FlowSep") {
+					var variantText = variantSelect.value === "hive" ? "Hive-trained" : "Official";
+					return model + " (" + variantText + ")";
+				}
+				return model;
+			};
+			
+			var updateSamples = function () {
+				var mix = mixSelect.value;
+				var samples = sampleMap[mix];
+				sampleSelect.innerHTML = "";
+				for (var i = 0; i < samples.length; i++) {
+					var opt = document.createElement("option");
+					opt.value = samples[i];
+					opt.textContent = "Sample " + (i + 1);
+					sampleSelect.appendChild(opt);
+				}
+			};
+			
+			var updateContent = function () {
+				var modelKeyA = getModelKey(modelSelectA, variantSelectA);
+				var modelKeyB = getModelKey(modelSelectB, variantSelectB);
+				var modelLabelA = getModelLabel(modelSelectA, variantSelectA);
+				var modelLabelB = getModelLabel(modelSelectB, variantSelectB);
+				var mix = mixSelect.value;
+				var sample = sampleSelect.value;
+				var baseMix = "assets/demo_model_results_apollo/" + modelKeyA + "/" + mix + "/" + sample + "/";
+				var baseA = "assets/demo_model_results_apollo/" + modelKeyA + "/" + mix + "/" + sample + "/";
+				var baseB = "assets/demo_model_results_apollo/" + modelKeyB + "/" + mix + "/" + sample + "/";
+				var prefix = sample + ".";
+				var permA = allowed[modelKeyA];
+				var permB = allowed[modelKeyB];
+				var numSources = parseInt(mix.charAt(0));
+				var labels = labelsData[sample] || [];
+				var html = "";
+				
+				html += '<div class="demo-compare-container">';
+				
+				html += '<div class="demo-column">';
+				html += '<div class="demo-column-label">Mix & GT</div>';
+				if (permA && permA.s) {
+					for (var i = 1; i <= numSources; i++) {
+						var gtLabel = labels[i - 1] ? labels[i - 1] : ("Label " + i);
+						html += '<div class="demo-item">';
+						html += '<div class="demo-item-title">' + gtLabel + '</div>';
+						html += '<img src="' + baseMix + prefix + 's' + i + '_spectrogram.png" alt="S' + i + '">';
+						html += '<audio controls src="' + baseMix + prefix + 's' + i + '.wav"></audio>';
+						html += '</div>';
+					}
+				}
+				if (permA && permA.mix) {
+					html += '<div class="demo-item">';
+					html += '<div class="demo-item-title">Mix</div>';
+					html += '<img src="' + baseMix + prefix + 'mix_spectrogram.png" alt="Mix">';
+					html += '<audio controls src="' + baseMix + prefix + 'mix.wav"></audio>';
+					html += '</div>';
+				}
+				html += '</div>';
+				
+				html += '<div class="demo-column">';
+				html += '<div class="demo-column-label">' + modelLabelA + '</div>';
+				if (permA && permA.inference) {
+					for (var j = 1; j <= numSources; j++) {
+						var infLabelA = labels[j - 1] ? labels[j - 1] : ("Label " + j);
+						html += '<div class="demo-item">';
+						html += '<div class="demo-item-title">' + infLabelA + '</div>';
+						html += '<img src="' + baseA + prefix + 'inference' + j + '_spectrogram.png" alt="Inf' + j + '">';
+						html += '<audio controls src="' + baseA + prefix + 'inference' + j + '.wav"></audio>';
+						html += '</div>';
+					}
+				}
+				html += '</div>';
+				
+				html += '<div class="demo-column">';
+				html += '<div class="demo-column-label">' + modelLabelB + '</div>';
+				if (permB && permB.inference) {
+					for (var k = 1; k <= numSources; k++) {
+						var infLabelB = labels[k - 1] ? labels[k - 1] : ("Label " + k);
+						html += '<div class="demo-item">';
+						html += '<div class="demo-item-title">' + infLabelB + '</div>';
+						html += '<img src="' + baseB + prefix + 'inference' + k + '_spectrogram.png" alt="Inf' + k + '">';
+						html += '<audio controls src="' + baseB + prefix + 'inference' + k + '.wav"></audio>';
+						html += '</div>';
+					}
+				}
+				html += '</div>';
+				
+				html += '</div>';
+				
+				content.innerHTML = html;
+			};
+			
+			mixSelect.addEventListener("change", function() {
+				updateSamples();
+				updateContent();
+			});
+			modelSelectA.addEventListener("change", function() {
+				updateVariantVisibility(modelSelectA, variantContainerA);
+				updateContent();
+			});
+			modelSelectB.addEventListener("change", function() {
+				updateVariantVisibility(modelSelectB, variantContainerB);
+				updateContent();
+			});
+			variantSelectA.addEventListener("change", updateContent);
+			variantSelectB.addEventListener("change", updateContent);
+			sampleSelect.addEventListener("change", updateContent);
+			
+			updateVariantVisibility(modelSelectA, variantContainerA);
+			updateVariantVisibility(modelSelectB, variantContainerB);
+			updateSamples();
+			updateContent();
+		})();
+	</script>
+</body>
+
+</html>

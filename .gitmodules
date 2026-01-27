@@ -1,6 +1,0 @@
-[submodule "Apollo"]
-	path = pipeline/Apollo
-	url = https://github.com/JusperLee/Apollo.git
-[submodule "icefall"]
-	path = pipeline/icefall
-	url = https://github.com/k2-fsa/icefall.git
