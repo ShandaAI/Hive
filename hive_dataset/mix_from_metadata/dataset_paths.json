@@ -1,0 +1,15 @@
+{
+    "AudioSet": "/path/to/AudioSet",
+    "AVE": "/path/to/AVE_Dataset",
+    "BBC_Sound_Effects": "/path/to/BBC_Sound_Effects",
+    "clothov2": "/path/to/clotho_v2",
+    "DCASE_real": "/path/to/DCASE2024_T9",
+    "DCASE_synth": "/path/to/DCASE2024_T9",
+    "ESC50": "/path/to/ESC-50-master",
+    "FreeSound": "/path/to/FreeSound",
+    "FSD50K": "/path/to/FSD50K",
+    "MUSIC21": "/path/to/MUSIC_dataset",
+    "SoundBible": "/path/to/SoundBible",
+    "VGGSound": "/path/to/vggsound",
+    "Voicebank_DEMAND": "/path/to/Voicebank_DEMAND"
+}
