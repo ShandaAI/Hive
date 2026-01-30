@@ -7,7 +7,7 @@
     <strong>Tsinghua University, Shanda AI, Johns Hopkins University</strong><br>
     <strong><sup>*</sup>Equal contribution</strong><br>
     <strong>Completed during Kai Li's internship at Shanda AI.</strong><br>
-  <a href="#">📜 Arxiv 2026</a> | <a href="#">🎶 Demo</a> | <a href="#">🤗 Dataset</a>
+  <a href="#">📜 Arxiv 2026</a> | <a href="#">🎶 Demo</a> | <a href="https://huggingface.co/datasets/ShandaAI/Hive">🤗 Dataset</a>
 </p>
 
 <p align="center">
