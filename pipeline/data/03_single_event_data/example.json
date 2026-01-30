@@ -1,0 +1,10 @@
+[
+  {
+    "text_label": "Dog",
+    "audio_path": "/path/to/segments/sample_002_chunk1.wav"
+  },
+  {
+    "text_label": "Rain",
+    "audio_path": "/path/to/segments/sample_003_chunk1.wav"
+  }
+]
