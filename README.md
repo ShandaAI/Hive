@@ -12,7 +12,7 @@
 
 <p align="center">
   <img src="https://visitor-badge.laobi.icu/badge?page_id=ShandaAI.Hive" alt="访客统计" />
-  <img src="https://img.shields.io/github/stars/ShandaAI/Hive?style=social&cacheSeconds=60" alt="GitHub stars">
+  <img src="https://img.shields.io/github/stars/ShandaAI/Hive?style=social" alt="GitHub stars">
   <img alt="Static Badge" src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" />
 </p>
 
