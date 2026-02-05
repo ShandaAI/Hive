@@ -36,10 +36,7 @@ def cut_audio(audio_path, seg_folder_path, energy_threshold=0.0005):
         if end == len(data) and (end - start) / samplerate < 5:
             break
         
-        if len(segment.shape) > 1:
-            energy = np.mean(np.sum(segment**2, axis=1)) / len(segment)
-        else:
-            energy = np.sum(segment**2) / len(segment)
+        energy = np.mean(segment**2)
             
         if energy < energy_threshold:
             continue
