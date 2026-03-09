@@ -1,1 +1,4 @@
 *.DS_Store
+*.pyc
+*.pth
+temp_result

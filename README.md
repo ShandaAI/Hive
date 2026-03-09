@@ -7,7 +7,7 @@
     <strong>Tsinghua University, Shanda AI, Johns Hopkins University</strong><br>
     <strong><sup>*</sup>Equal contribution</strong><br>
     <strong>Completed during Kai Li's internship at Shanda AI.</strong><br>
-  <a href="https://arxiv.org/abs/2601.22599">📜 Arxiv 2026</a> | <a href="https://shandaai.github.io/Hive/">🎶 Demo</a> | <a href="https://huggingface.co/datasets/ShandaAI/Hive">🤗 Dataset</a> | <a href="https://huggingface.co/datasets/faiteamartaliius/Hive">🤗 Dataset (Third-party synthetic data)</a>
+  <a href="https://arxiv.org/abs/2601.22599">📜 Arxiv 2026</a> | <a href="https://shandaai.github.io/Hive/">🎶 Demo</a> | <a href="https://huggingface.co/datasets/ShandaAI/Hive">🤗 Dataset</a> | <a href="https://huggingface.co/spaces/JusperLee/Hive">🤗 Space</a>
 </p>
 
 <p align="center">
@@ -18,17 +18,27 @@
 
 ---
 
+## 💥 News
+
+- [2026-03-09] We release `infer_audiosep.py` for one-command AudioSep inference in Hive. The script automatically downloads config and checkpoints from [ShandaAI/AudioSep-hive](https://huggingface.co/ShandaAI/AudioSep-hive). 🚀
+- [2026-03-09] We release `infer_flowsep.py` for one-command FlowSep inference in Hive, with automatic config and checkpoint download from [ShandaAI/FlowSep-hive](https://huggingface.co/ShandaAI/FlowSep-hive). 🚀
+- [2026-03-09] We release `app.py`, a unified Gradio demo that supports both **AudioSep-hive** and **FlowSep-hive** in a single interface. 🚀
+- [2026-03-09] Community Hugging Face Space is available at [JusperLee/Hive](https://huggingface.co/spaces/JusperLee/Hive) for quick interactive demo. 🚀
+- [2026-02-09] Thanks to [@faiteamartaliius](https://huggingface.co/faiteamartaliius) for using this codebase to synthesize data and publicly sharing a third-party Hive-style dataset: [faiteamartaliius/Hive](https://huggingface.co/datasets/faiteamartaliius/Hive). 🙏
+
+
 ## 📌 Table of Contents
 
 - [📄 Abstract](#-abstract)
 - [📂 Repository Structure](#-repository-structure)
 - [🍯 Hive Dataset](#-hive-dataset)
 - [⚙️ Data Collection Pipeline](#️-data-collection-pipeline)
+- [🎧 Inference](#-inference)
+- [🖥️ Gradio App](#️-gradio-app)
 - [📖 Citation](#-citation)
 - [⚖️ License](#️-license)
 - [🙏 Acknowledgments](#-acknowledgments)
 
----
 
 ## 📄 Abstract
 
@@ -47,7 +57,6 @@ These findings highlight that <a style="background-color:LightYellow;color:red;"
 offering a new paradigm for training robust auditory foundation models with reduced computational costs.
 </p>
 
----
 
 ## 📂 Repository Structure
 
@@ -81,7 +90,6 @@ offering a new paradigm for training robust auditory foundation models with redu
 └── README.md                              
 ```
 
----
 
 ## 🍯 Hive Dataset
 
@@ -94,7 +102,6 @@ offering a new paradigm for training robust auditory foundation models with redu
 
 Please refer to [`hive_dataset/`](hive_dataset/) for details
 
----
 
 ## ⚙️ Data Collection Pipeline
 
@@ -110,17 +117,69 @@ An automated 6-step pipeline for mining high-purity single-event audio from weak
 
 Please refer to [`pipeline/`](pipeline/) for details
 
----
+
+## 🎧 Inference
+
+Hive provides two inference scripts with automatic checkpoint/config download from Hugging Face:
+
+- `infer_audiosep.py` -> [ShandaAI/AudioSep-hive](https://huggingface.co/ShandaAI/AudioSep-hive)
+- `infer_flowsep.py` -> [ShandaAI/FlowSep-hive](https://huggingface.co/ShandaAI/FlowSep-hive)
+
+### 1) Install dependencies
+
+```bash
+cd Hive
+pip install torch torchaudio librosa pyyaml pytorch-lightning huggingface_hub gradio
+```
+
+### 2) AudioSep inference
+
+```bash
+python infer_audiosep.py \
+  --audio_file /path/to/mixture.wav \
+  --text "acoustic guitar" \
+  --output_file /path/to/audiosep_output.wav
+```
+
+### 3) FlowSep inference
+
+```bash
+python infer_flowsep.py \
+  --audio_file /path/to/mixture.wav \
+  --text "acoustic guitar" \
+  --output_file /path/to/flowsep_output.wav
+```
+
+## 🖥️ Gradio App
+
+`app.py` launches an interactive local demo with both models in one UI:
+
+- Model choices: `AudioSep-hive`, `FlowSep-hive`
+- Input: mixed audio + text query
+- Output: separated waveform
+
+Run:
+
+```bash
+cd Hive
+python app.py
+```
+
+Then open the local Gradio URL printed in terminal.
 
 ## 📖 Citation
 
 If you use this code or the Hive Dataset, please cite:
 
 ```bibtex
-
+@article{li2026semantically,
+  title={A Semantically Consistent Dataset for Data-Efficient Query-Based Universal Sound Separation},
+  author={Li, Kai and Cheng, Jintao and Zeng, Chang and Yan, Zijun and Wang, Helin and Su, Zixiong and Zheng, Bo and Hu, Xiaolin},
+  journal={arXiv preprint arXiv:2601.22599},
+  year={2026}
+}
 ```
 
----
 
 ## ⚖️ License
 
@@ -134,7 +193,6 @@ This project is licensed under the Apache License 2.0. See [LICENSE](LICENSE) fo
 - **AudioTag**: Apache 2.0
 - **Apollo**: Check model repository for specific license
 
----
 
 ## 🙏 Acknowledgments
 
